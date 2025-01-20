@@ -1,0 +1,21 @@
+{
+  "name": "learning-express",
+  "version": "1.0.0",
+  "description": "Learning Express.Js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GHDBASHEN/Learning-Express.js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/GHDBASHEN/Learning-Express.js/issues"
+  },
+  "homepage": "https://github.com/GHDBASHEN/Learning-Express.js#readme"
+}
