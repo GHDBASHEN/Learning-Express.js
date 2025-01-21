@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Learning Express.Js",
   "main": "index.js",
+  "types": "module",
   "scripts": {
     "test": "node server",
     "dev": "node --watch --env-file=.env server"
