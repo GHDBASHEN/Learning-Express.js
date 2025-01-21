@@ -18,23 +18,32 @@ router.get('/', (req, res) => {
    res.status(200).json(posts);
 });
 //get single post
-router.get('/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     const id =parseInt(req.params.id);
    const post= posts.find((post) => post.id === id);
    if (!post)
     return res
         .status(404)
         .json({message: 'A post with the id ${id} was not found'});
-;
-    res.status(200).json(post);
+
+    post.title = req.body.title;
+    res.status(200).json(posts);
 
 });
 
 //create a post
 router.post('/', (req, res) => {
-    console.log(req.body);
+    const newPost ={
+        id: posts.length + 1,
+        title: req.body.title,
+        
+    }
+if (!newPost.title){
+    return res.status(400).json({message: 'Title is required'});
+}
 
-    res.status(201).json(req.body);
+posts.push(newPost);
+res.status(201).json(req.body);
 });
 
 module.exports = router;
