@@ -26,7 +26,7 @@ router.put('/:id', (req, res) => {
         .status(404)
         .json({message: 'A post with the id ${id} was not found'});
 
-    post.title = req.body.title;
+    posts =posts.filter((post) => post.id !== id);
     res.status(200).json(posts);
 
 });
@@ -46,4 +46,4 @@ posts.push(newPost);
 res.status(201).json(req.body);
 });
 
-module.exports = router;
+module .exports = router;
