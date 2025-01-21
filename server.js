@@ -12,8 +12,12 @@ const posts = [
 ];
 //get all posts
 app.get('/api/posts', (req, res) => {
-    console.log(req.query);
-    res.json(posts);
+   const limit = parseInt(req.query.limit);
+   
+   if (!isNaN(limit)&& limit > 0) {
+    return res.status(200).json(posts.slice(0, limit));
+   }
+   res.status(200).json(posts);
 });
 //get single post
 app.get('/api/posts/:id', (req, res) => {
