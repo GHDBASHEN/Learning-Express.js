@@ -7,10 +7,12 @@
   "scripts": {
     "test": "node server",
     "dev": "node --watch --env-file=.env server"
+    
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GHDBASHEN/Learning-Express.js.git"
+    
   },
   "keywords": [],
   "author": "",
