@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Learning Express.Js",
   "main": "index.js",
-  "types": "module",
+  
   "scripts": {
     "test": "node server",
     "dev": "node --watch --env-file=.env server"
@@ -17,7 +17,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/GHDBASHEN/Learning-Express.js/issues"
   },
