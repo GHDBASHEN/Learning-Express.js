@@ -1,15 +1,20 @@
-const express = require('express');
-const path = require('path');
+import express from 'express';
+import path from 'path';
+import posts from './routes/posts.js';
+import errorhandler from './middleware/error.js';
+
 const port = process.env.PORT || 3000;
-const posts = require('./routes/posts');
-
 const app = express();
-app.use(express.json());
-app.use (express.urlencoded({extended: false}));
 
-//Routes
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+// Routes
 app.use('/api/posts', posts);
 
+// Error handler
+app.use(errorhandler);
+
 app.listen(port, () => {
-  console.log('Server is running on http://localhost:3000');
+  console.log(`Server is running on http://localhost:${port}`);
 });
