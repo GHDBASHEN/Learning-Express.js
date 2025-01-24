@@ -9,6 +9,8 @@ A simple Express.js project for learning middleware, routing, and error handling
 - Error handling middleware
 - Modular routes
 
+![image](https://github.com/user-attachments/assets/3bfdcd7e-757e-4699-b17e-88d87c26eae9)
+
 
 ## Installation
 
