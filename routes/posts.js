@@ -8,7 +8,7 @@ let posts = [
 ];
 
 // Get all posts
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   const limit = parseInt(req.query.limit);
 
   if (!isNaN(limit) && limit > 0) {
@@ -23,6 +23,7 @@ router.get('/:id', (req, res, next) => {
   const post = posts.find((post) => post.id === id);
   if (!post) {
     const error = new Error(`A post with the id ${id} was not found`);
+    error.status = 404;
     return next(error);
   }
 
@@ -30,7 +31,7 @@ router.get('/:id', (req, res, next) => {
 });
 
 // Update a post
-router.put('/:id', (req, res) => {
+router.put('/:id', (req, res, next) => {
   const id = parseInt(req.params.id);
   const post = posts.find((post) => post.id === id);
   if (!post)
@@ -44,14 +45,16 @@ router.put('/:id', (req, res) => {
 });
 
 // Create a post
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
   const newPost = {
     id: posts.length + 1,
     title: req.body.title,
     content: req.body.content,
   };
   if (!newPost.title || !newPost.content) {
-    return res.status(400).json({ message: 'Title and content are required' });
+    const error = new Error(`please include a title`);
+    error.status = 400;
+    return next(error);
   }
 
   posts.push(newPost);
@@ -59,7 +62,7 @@ router.post('/', (req, res) => {
 });
 
 // Delete a post
-router.delete('/:id', (req, res) => {
+router.delete('/:id', (req, res, next) => {
   const id = parseInt(req.params.id);
   const postIndex = posts.findIndex((post) => post.id === id);
 
