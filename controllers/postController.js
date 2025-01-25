@@ -41,10 +41,9 @@ export const getPost =(req, res, next) => {
 export const createPost = (req, res, next) => {
     const newPost = {
       id: posts.length + 1,
-      title: req.body.title,
-      content: req.body.content,
+      title: req.body.title
     };
-    if (!newPost.title || !newPost.content) {
+    if (!newPost.title) {
       const error = new Error(`please include a title`);
       error.status = 400;
       return next(error);

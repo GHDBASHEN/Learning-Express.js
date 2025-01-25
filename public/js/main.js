@@ -2,34 +2,33 @@ const output = document.querySelector('#output');
 const button = document.querySelector('#get-posts-btn');
 const form = document.querySelector('#add-post-form');
 
+// Fetch and display posts
 async function showPosts() {
     try {
-        const res =await fetch('http://localhost:3000/api/posts');
-    if (!res.ok) {
-        throw new Error(`Failed to fetch posts`);
-
-    }
-    const posts =await res.json();
-    output.innerHTML ='';
-    posts.forEach((post) => {
-        const postEl = document.createElement('div');
-        postEl.textContent = post.title;
-        output.appendChild(postEl);
-    });
+        const res = await fetch('http://localhost:3000/api/posts');
+        if (!res.ok) {
+            throw new Error('Failed to fetch posts');
+        }
+        const posts = await res.json();
+        output.innerHTML = ''; // Clear previous output
+        posts.forEach((post) => {
+            const postEl = document.createElement('div');
+            postEl.textContent = post.title;
+            output.appendChild(postEl);
+        });
     } catch (error) {
-        console.log('Error fetching posts:', error);
+        console.error('Error fetching posts:', error);
     }
-
 }
 
-//submit new post
-async function addpost(e) {
-    e.preventDefault();
-    const formData =new FormData(this);
+// Submit a new post
+async function addPost(e) {
+    e.preventDefault(); // Prevent form from reloading the page
+    const formData = new FormData(form);
     const title = formData.get('title');
 
     try {
-        const res =await fetch('http://localhost:3000/api/posts', {
+        const res = await fetch('http://localhost:3000/api/posts', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -37,26 +36,19 @@ async function addpost(e) {
             body: JSON.stringify({ title }),
         });
         if (!res.ok) {
-            throw new Error(`Failed to add post`);
+            throw new Error('Failed to add post');
         }
-        const newPost =await res.json();
+        const newPost = await res.json();
         const postEl = document.createElement('div');
         postEl.textContent = newPost.title;
         output.appendChild(postEl);
-        showPosts();
+        form.reset(); // Clear form input
+        showPosts(); // Refresh posts list
     } catch (error) {
-        console.error('Error adding post:');
-
-        
+        console.error('Error adding post:', error);
     }
-
 }
 
-
-
-
-
-
-//event listener
+// Event listeners
 button.addEventListener('click', showPosts);
-form.addEventListener('submit', addpost);
+form.addEventListener('submit', addPost);
